@@ -1,0 +1,15 @@
+FROM --platform=linux/amd64 ubuntu:22.10
+WORKDIR /usr/src
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt update \
+    && apt-get install -y --no-install-recommends \
+    wget
+   
+RUN wget --no-check-certificate http://opengene.org/fastp/fastp.0.23.1 \
+    && mv fastp.0.23.1 fastp \
+    && chmod a+x ./fastp
+
+# Add working dir to path so executables can be run
+ENV PATH="/usr/src/:${PATH}"
