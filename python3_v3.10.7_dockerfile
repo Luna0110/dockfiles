@@ -1,0 +1,15 @@
+FROM --platform=linux/amd64 ubuntu:22.10
+WORKDIR /usr/src
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt update
+RUN apt -y install python3
+RUN apt-get -y install python3-pip
+   
+
+RUN pip install click
+RUN pip install pandas
+
+# Add working dir to path so executables can be run
+ENV PATH="/usr/src/:${PATH}"
